@@ -8,7 +8,7 @@ import "./index.css";
 import apiRequest from "./apiRequest";
 
 const App = () => {
-  const API_URL = "http://localhost:3500/items";
+  const API_URL = "http://localhost:3000/items";
 
   const [items, setItems] = useState([]);
   const [newItem, setNewItem] = useState("");
@@ -92,7 +92,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <Header title="Grocery List" />
+      <Header title="Todo List" />
       <AddItem
         newItem={newItem}
         setNewItem={setNewItem}
