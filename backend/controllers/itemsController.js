@@ -3,7 +3,6 @@ const asyncHandler = require('express-async-handler')
 
 // @desc Get all items
 // @route GET /items
-// @access Private
 const getAllItems = asyncHandler(async (req, res) => {
     const items = await Item.find({}).lean().exec()
     if (items) {
@@ -11,6 +10,8 @@ const getAllItems = asyncHandler(async (req, res) => {
     }
 })
 
+// @desc Create a new items
+// @route POST /items 
 const createNewItem = asyncHandler(async (req, res) => {
     const { id, checked, itemName } = req.body
 
@@ -29,7 +30,7 @@ const createNewItem = asyncHandler(async (req, res) => {
     // Create and store the new item
     const item = await Item.create({ item })
 
-    if (note) { // Created 
+    if (item) { // Created 
         return res.status(201).json({ message: 'New item created' })
     } else {
         return res.status(400).json({ message: 'Invalid item data received' })
@@ -37,9 +38,8 @@ const createNewItem = asyncHandler(async (req, res) => {
 
 })
 
-// @desc Update a note
-// @route PATCH /notes
-// @access Private
+// @desc Update a item
+// @route PATCH /items
 const updateItem = asyncHandler(async (req, res) => {
     const { id } = req.params
     const { checked } = req.body
@@ -49,7 +49,7 @@ const updateItem = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'All fields are required' })
     }
 
-    // Confirm note exists to update
+    // Confirm item exists to update
     const item = await Item.findById(id).exec()
 
     if (!item) {
@@ -63,9 +63,8 @@ const updateItem = asyncHandler(async (req, res) => {
     res.json(`'${updatedItem.checked}' updated`)
 })
 
-// @desc Delete a note
-// @route DELETE /notes
-// @access Private
+// @desc Delete a item 
+// @route DELETE /items
 const deleteItem = asyncHandler(async (req, res) => {
     const { id } = req.params
 
@@ -74,7 +73,7 @@ const deleteItem = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'Item ID required' })
     }
 
-    // Confirm note exists to delete 
+    // Confirm item exists to delete 
     const item = await Item.findById(id).exec()
 
     if (!item) {
