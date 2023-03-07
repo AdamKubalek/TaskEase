@@ -1,0 +1,12 @@
+20230307	14:37:33	ece26587-1caa-4495-b3de-b8f522ccaafa	CastError: Cast to ObjectId failed for value "1" (type number) at path "_id" for model "Item"	PATCH	/items	undefined
+20230307	14:38:35	d143efd9-101d-48f5-836d-bf1551c69be8	CastError: Cast to ObjectId failed for value "1" (type number) at path "_id" for model "Item"	PATCH	/items	undefined
+20230307	14:39:08	d535aa1e-a204-4287-acdf-2bfab768ed2f	CastError: Cast to ObjectId failed for value "1" (type string) at path "_id" for model "Item"	PATCH	/items	undefined
+20230307	14:39:09	a5f275f9-fb45-4605-a373-654ec9b7ae71	CastError: Cast to ObjectId failed for value "1" (type string) at path "_id" for model "Item"	PATCH	/items	undefined
+20230307	14:39:10	9543c62f-72ab-4588-875b-84e6089ac183	CastError: Cast to ObjectId failed for value "1" (type string) at path "_id" for model "Item"	PATCH	/items	undefined
+20230307	14:41:07	134c87c1-5892-4385-b6e8-9889629c4605	ReferenceError: id is not defined	PATCH	/items	undefined
+20230307	14:41:10	cb678512-69a8-4514-b6cd-6db84eabbf44	ReferenceError: id is not defined	PATCH	/items	undefined
+20230307	14:41:11	151ce366-94e6-4457-95e5-bb30cce256b7	ReferenceError: id is not defined	PATCH	/items	undefined
+20230307	14:43:42	d07212a7-8218-4a4f-a9a3-588848f3084b	ReferenceError: Cannot access 'item' before initialization	PATCH	/items	undefined
+20230307	14:43:55	2f842909-3032-4d32-ae33-32dd463d5a28	ReferenceError: Cannot access 'item' before initialization	PATCH	/items	undefined
+20230307	14:44:22	700df3be-0114-49c8-b9c0-29838360f572	ReferenceError: Cannot access 'item' before initialization	PATCH	/items	undefined
+20230307	14:46:05	8f4ab470-0ec1-40fe-9d61-7e5b85185bee	SyntaxError: Unexpected token } in JSON at position 17	DELETE	/items	undefined

@@ -41,16 +41,16 @@ const createNewItem = asyncHandler(async (req, res) => {
 // @desc Update a item
 // @route PATCH /items
 const updateItem = asyncHandler(async (req, res) => {
-  const { id } = req.params;
-  const { checked } = req.body;
+  const { id, checked } = req.body;
+  console.log(req.body);
 
   // Confirm data
   if (!id || typeof checked !== "boolean") {
     return res.status(400).json({ message: "All fields are required" });
   }
 
-  // Confirm item exists to update
-  const item = await Item.findById(id).exec();
+  // Confirm item exists to update and update it
+  const item = await Item.findOne({ id }).exec();
 
   if (!item) {
     return res.status(400).json({ message: "Item not found" });
@@ -66,7 +66,7 @@ const updateItem = asyncHandler(async (req, res) => {
 // @desc Delete a item
 // @route DELETE /items
 const deleteItem = asyncHandler(async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.body;
 
   // Confirm data
   if (!id) {
@@ -74,7 +74,7 @@ const deleteItem = asyncHandler(async (req, res) => {
   }
 
   // Confirm item exists to delete
-  const item = await Item.findById(id).exec();
+  const item = await Item.findOne({ id }).exec();
 
   if (!item) {
     return res.status(400).json({ message: "Item not found" });
