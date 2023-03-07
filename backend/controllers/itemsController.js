@@ -16,7 +16,7 @@ const createNewItem = asyncHandler(async (req, res) => {
   const { id, checked, itemName } = req.body;
 
   // Confirm data
-  if (!id || !checked || !itemName) {
+  if (!id || typeof checked !== "boolean" || !itemName) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
@@ -28,7 +28,7 @@ const createNewItem = asyncHandler(async (req, res) => {
   }
 
   // Create and store the new item
-  const item = await Item.create({ item });
+  const item = await Item.create({ id, checked, itemName });
 
   if (item) {
     // Created
