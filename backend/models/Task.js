@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 const AutoIncrement = require("mongoose-sequence")(mongoose);
 
-const itemSchema = new mongoose.Schema(
+const taskSchema = new mongoose.Schema(
   {
-    checked: {
+    completed: {
       type: Boolean,
       required: true,
     },
-    itemName: {
+    task: {
       type: String,
       required: true,
     },
@@ -22,10 +22,10 @@ const itemSchema = new mongoose.Schema(
   }
 );
 
-itemSchema.plugin(AutoIncrement, {
+taskSchema.plugin(AutoIncrement, {
   inc_field: "id",
-  id: "item_id",
+  id: "task_id",
   start_seq: 100,
 });
 
-module.exports = mongoose.model("Item", itemSchema);
+module.exports = mongoose.model("Task", taskSchema);
