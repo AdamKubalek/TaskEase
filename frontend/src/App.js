@@ -1,6 +1,6 @@
 import Header from "./Header";
 import Search from "./Search";
-import AddItem from "./AddItem";
+import AddTask from "./AddTask";
 import Content from "./Content";
 import Footer from "./Footer";
 import { useState, useEffect } from "react";
@@ -8,21 +8,21 @@ import "./index.css";
 import apiRequest from "./apiRequest";
 
 const App = () => {
-  const API_URL = "http://localhost:3500/items";
+  const API_URL = "http://localhost:3500/tasks";
 
-  const [items, setItems] = useState([]);
-  const [newItem, setNewItem] = useState("");
+  const [tasks, setTasks] = useState([]);
+  const [newTask, setNewTask] = useState("");
   const [search, setSearch] = useState("");
   const [fetchError, setFetchError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchItems = async () => {
+    const fetchTasks = async () => {
       try {
         const response = await fetch(API_URL);
         if (!response.ok) throw Error("Did not receive expected data");
-        const listItems = await response.json();
-        setItems(listItems);
+        const listTasks = await response.json();
+        setTasks(listTasks);
         setFetchError(null);
       } catch (error) {
         setFetchError(error.message);
@@ -31,41 +31,41 @@ const App = () => {
       }
     };
     setTimeout(() => {
-      fetchItems();
+      fetchTasks();
     }, 2000);
   }, []);
 
-  const addItem = async (item) => {
-    const id = items.length ? items[items.length - 1].id + 1 : 1;
-    const myNewItem = { id, checked: false, itemName: item };
-    console.log(myNewItem);
-    const listItems = [...items, myNewItem];
-    setItems(listItems);
+  const addTask = async (task) => {
+    const id = tasks.length ? tasks[tasks.length - 1].id + 1 : 1;
+    const myNewTask = { id, completed: false, task: task };
+    console.log(myNewTask);
+    const listTasks = [...tasks, myNewTask];
+    setTasks(listTasks);
 
     const postOptions = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(myNewItem),
+      body: JSON.stringify(myNewTask),
     };
     const result = await apiRequest(API_URL, postOptions);
     if (result) setFetchError(result);
   };
 
   const handleCheck = async (id) => {
-    const listItems = items.map((item) =>
-      item.id === id ? { ...item, checked: !item.checked } : item
+    const listTasks = tasks.map((task) =>
+      task.id === id ? { ...task, completed: !task.completed } :task 
     );
-    setItems(listItems);
+    setTasks(listTasks);
 
-    const myItem = listItems.filter((item) => item.id === id);
+    const myTask = listTasks.filter((task) => task.id === id);
     const updateOptions = {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id: myItem[0].id, checked: myItem[0].checked }),
+      body: JSON.stringify({ id: myTask[0].id, completed: myTask[0].completed }),
     };
     //const reqUrl = `${API_URL}/${id}`;
     const result = await apiRequest(`${API_URL}`, updateOptions);
@@ -73,16 +73,16 @@ const App = () => {
   };
 
   const handleDelete = async (id) => {
-    const myItem = items.filter((item) => item.id === id);
-    const listItems = items.filter((item) => item.id !== id);
-    setItems(listItems);
+    const myTask = tasks.filter((task) => task.id === id);
+    const listTasks = tasks.filter((task) => task.id !== id);
+    setTasks(listTasks);
 
     const deleteOptions = {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id: myItem[0].id }),
+      body: JSON.stringify({ id: myTask[0].id }),
     };
     // const reqUrl = `${API_URL}/${id}`;
     const result = await apiRequest(API_URL, deleteOptions);
@@ -91,17 +91,17 @@ const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!newItem) return;
-    addItem(newItem);
-    setNewItem("");
+    if (!newTask) return;
+    addTask(newTask);
+    setNewTask("");
   };
 
   return (
     <div className="App">
       <Header title="Todo List" />
-      <AddItem
-        newItem={newItem}
-        setNewItem={setNewItem}
+      <AddTask
+        newTask={newTask}
+        setNewTask={setNewTask}
         handleSubmit={handleSubmit}
       />
       <Search setSearch={setSearch} search={search} />
@@ -110,15 +110,15 @@ const App = () => {
         {fetchError && <p style={{ color: "red" }}>{`Error: ${fetchError}`}</p>}
         {!fetchError && !isLoading && (
           <Content
-            items={items.filter((item) =>
-              item.itemName.toLowerCase().includes(search.toLowerCase())
+            tasks={tasks.filter((task) =>
+              task.task.toLowerCase().includes(search.toLowerCase())
             )}
             handleCheck={handleCheck}
             handleDelete={handleDelete}
           />
         )}
       </main>
-      <Footer length={items.length} />
+      <Footer length={tasks.length} />
     </div>
   );
 };

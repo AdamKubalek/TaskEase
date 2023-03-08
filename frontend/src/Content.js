@@ -1,16 +1,16 @@
-import ItemList from "./ItemList";
+import TaskList from "./TaskList";
 
-const Content = ({ items, handleCheck, handleDelete }) => {
+const Content = ({ tasks, handleCheck, handleDelete }) => {
   return (
     <>
-      {items.length ? (
-        <ItemList
-          items={items}
+      {tasks.length ? (
+        <TaskList
+          tasks={tasks}
           handleCheck={handleCheck}
           handleDelete={handleDelete}
         />
       ) : (
-        <p style={{ marginTop: "2rem" }}>Your shopping list is empty</p>
+        <p style={{ marginTop: "2rem" }}>You don't have any tasks.</p>
       )}
     </>
   );
