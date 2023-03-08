@@ -54,7 +54,7 @@ const App = () => {
   };
 
   const handleCheck = async (id) => {
-    const listItems = items.map((item) => 
+    const listItems = items.map((item) =>
       item.id === id ? { ...item, checked: !item.checked } : item
     );
     setItems(listItems);
@@ -73,14 +73,19 @@ const App = () => {
   };
 
   const handleDelete = async (id) => {
+    const myItem = items.filter((item) => item.id === id);
     const listItems = items.filter((item) => item.id !== id);
     setItems(listItems);
 
     const deleteOptions = {
       method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: myItem[0].id }),
     };
-    const reqUrl = `${API_URL}/${id}`;
-    const result = await apiRequest(reqUrl, deleteOptions);
+    // const reqUrl = `${API_URL}/${id}`;
+    const result = await apiRequest(API_URL, deleteOptions);
     if (result) setFetchError(result);
   };
 
