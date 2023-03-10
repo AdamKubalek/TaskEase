@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 // @access Private
 const getAllUsers = async (req, res) => {
   // Get all users from MongoDB
+  // Exclude password field
   const users = await User.find().select("-password").lean();
 
   // If no users
@@ -40,10 +41,7 @@ const createNewUser = async (req, res) => {
   // Hash password
   const hashedPwd = await bcrypt.hash(password, 10); // salt rounds
 
-  const userObject =
-    !Array.isArray(roles) || !roles.length
-      ? { username, password: hashedPwd }
-      : { username, password: hashedPwd, roles };
+  const userObject = { username, password: hashedPwd }
 
   // Create and store new user
   const user = await User.create(userObject);
@@ -60,15 +58,12 @@ const createNewUser = async (req, res) => {
 // @route PATCH /users
 // @access Private
 const updateUser = async (req, res) => {
-  const { id, username, roles, active, password } = req.body;
+  const { id, username, password } = req.body;
 
   // Confirm data
   if (
     !id ||
-    !username ||
-    !Array.isArray(roles) ||
-    !roles.length ||
-    typeof active !== "boolean"
+    !username
   ) {
     return res
       .status(400)
@@ -94,8 +89,6 @@ const updateUser = async (req, res) => {
   }
 
   user.username = username;
-  user.roles = roles;
-  user.active = active;
 
   if (password) {
     // Hash password

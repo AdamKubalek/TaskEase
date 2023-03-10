@@ -65,7 +65,7 @@ const updateTask = asyncHandler(async (req, res) => {
 
 // @desc Delete a task 
 // @route DELETE /tasks
-const deleteItem = asyncHandler(async (req, res) => {
+const deleteTask = asyncHandler(async (req, res) => {
   const { id } = req.body;
 
   // Confirm data

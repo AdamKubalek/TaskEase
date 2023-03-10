@@ -1,8 +1,8 @@
-import Header from "./Header";
-import Search from "./Search";
-import AddTask from "./AddTask";
-import Content from "./Content";
-import Footer from "./Footer";
+import Header from "./components/Header";
+import Search from "./features/tasks/Search";
+import AddTask from "./features/tasks/AddTask";
+import Content from "./features/tasks/Content";
+import Footer from "./components/Footer";
 import { useState, useEffect } from "react";
 import "./index.css";
 import apiRequest from "./apiRequest";

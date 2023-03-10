@@ -5,6 +5,13 @@ const jwt = require("jsonwebtoken");
 // @desc Login
 // @route POST /auth
 // @access Public
+// this route performs the following tasks:
+// 1. Check if username and password are provided
+// 2. Check if user exists
+// 3. Check if password matches
+// 4. Create access token
+// 5. Create refresh token
+// 6. Create secure cookie with refresh token
 const login = async (req, res) => {
   const { username, password } = req.body;
 
@@ -14,7 +21,7 @@ const login = async (req, res) => {
 
   const foundUser = await User.findOne({ username }).exec();
 
-  if (!foundUser || !foundUser.active) {
+  if (!foundUser) {
     return res.status(401).json({ message: "Unauthorized" });
   }
 
@@ -54,6 +61,10 @@ const login = async (req, res) => {
 // @desc Refresh
 // @route GET /auth/refresh
 // @access Public - because access token has expired
+// this route does following:
+// 1. checks if refresh token exists in cookie
+// 2. verifies refresh token
+// 3. if valid, creates new access token and sends it
 const refresh = (req, res) => {
   const cookies = req.cookies;
 
@@ -77,7 +88,6 @@ const refresh = (req, res) => {
         {
           UserInfo: {
             username: foundUser.username,
-            roles: foundUser.roles,
           },
         },
         process.env.ACCESS_TOKEN_SECRET,
