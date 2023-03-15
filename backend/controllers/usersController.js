@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 
 // @desc Get all users
 // @route GET /users
-// @access Private
 const getAllUsers = async (req, res) => {
   // Get all users from MongoDB
   // Exclude password field
@@ -19,9 +18,8 @@ const getAllUsers = async (req, res) => {
 
 // @desc Create new user
 // @route POST /users
-// @access Private
 const createNewUser = async (req, res) => {
-  const { username, password, roles } = req.body;
+  const { username, password} = req.body;
 
   // Confirm data
   if (!username || !password) {
@@ -56,7 +54,6 @@ const createNewUser = async (req, res) => {
 
 // @desc Update a user
 // @route PATCH /users
-// @access Private
 const updateUser = async (req, res) => {
   const { id, username, password } = req.body;
 
@@ -102,7 +99,6 @@ const updateUser = async (req, res) => {
 
 // @desc Delete a user
 // @route DELETE /users
-// @access Private
 const deleteUser = async (req, res) => {
   const { id } = req.body;
 

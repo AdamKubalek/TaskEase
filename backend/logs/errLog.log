@@ -1,0 +1,2 @@
+20230315	12:16:49	7a20800d-ea69-4348-ab99-6a850c7091e8	ValidationError: Task validation failed: task: Path `task` is required.	POST	/tasks	undefined
+20230315	12:20:16	cf9976a4-6771-4603-a638-882d733afcea	MongoServerError: E11000 duplicate key error collection: todoDB.tasks index: id_1 dup key: { id: 1 }	POST	/tasks	undefined

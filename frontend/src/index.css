@@ -68,7 +68,7 @@ ul li::before {
   content: "\200B";
 }
 
-.item {
+.task {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -77,11 +77,11 @@ ul li::before {
   background-color: #eee;
 }
 
-.item:first-child {
+.task:first-child {
   margin: 0;
 }
 
-.item input[type="checkbox"] {
+.task input[type="checkbox"] {
   text-align: center;
   width: 2.5rem;
   width: 48px;
@@ -93,16 +93,16 @@ ul li::before {
   margin-right: 0.5rem;
 }
 
-.item input[type="checkbox"]:focus + label {
+.task input[type="checkbox"]:focus + label {
   text-decoration: underline;
 }
 
-.item > label {
+.task > label {
   font-size: 0.75rem;
   flex-grow: 1;
 }
 
-.item svg {
+.task svg {
   width: 48px;
   min-width: 48px;
   height: 36px;
@@ -111,8 +111,8 @@ ul li::before {
   cursor: pointer;
 }
 
-.item svg:focus, 
-.item svg:hover {
+.task svg:focus, 
+.task svg:hover {
   color: red;
   outline: none;
 }
@@ -175,6 +175,31 @@ button:hover {
 }
 
 .searchForm input[type='text'] {
+  flex-grow: 1;
+  max-width: 100%;
+  min-height: 48px;
+  font-size: 1rem;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  outline: none;
+}
+
+.regForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0.25rem 0 0;
+  padding: 0 0.5rem 0.25rem;
+  border-bottom: 1px solid #eee;
+}
+
+.regForm label {
+  position: absolute;
+  left: -99999px;
+}
+
+.regForm input {
   flex-grow: 1;
   max-width: 100%;
   min-height: 48px;

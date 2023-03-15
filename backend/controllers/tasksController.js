@@ -1,10 +1,10 @@
-const Item = require("../models/Task");
+const Task = require("../models/Task");
 const asyncHandler = require("express-async-handler");
 
 // @desc Get all tasks 
 // @route GET /tasks
 const getAllTasks = asyncHandler(async (req, res) => {
-  const tasks = await Item.find({}).lean().exec();
+  const tasks = await Task.find({}).lean().exec();
   if (tasks) {
     res.json(tasks);
   }
@@ -13,22 +13,22 @@ const getAllTasks = asyncHandler(async (req, res) => {
 // @desc Create a new task 
 // @route POST /tasks
 const createNewTask = asyncHandler(async (req, res) => {
-  const { id, checked, itemName } = req.body;
+  const { id, completed, taskDesc } = req.body;
 
   // Confirm data
-  if (!id || typeof checked !== "boolean" || !itemName) {
+  if (!id || typeof completed !== "boolean" || !taskDesc) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
   // Check for duplicate task 
-  const duplicate = await Item.findOne({ itemName }).lean().exec();
+  const duplicate = await Task.findOne({ taskDesc }).lean().exec();
 
   if (duplicate) {
     return res.status(409).json({ message: "Duplicate task" });
   }
 
   // Create and store the new task 
-  const task = await Item.create({ id, checked, itemName });
+  const task = await Task.create({ id, completed, taskDesc });
 
   if (task) {
     // Created
@@ -41,26 +41,26 @@ const createNewTask = asyncHandler(async (req, res) => {
 // @desc Update a task 
 // @route PATCH /tasks
 const updateTask = asyncHandler(async (req, res) => {
-  const { id, checked } = req.body;
+  const { id, completed } = req.body;
   console.log(req.body);
 
   // Confirm data
-  if (!id || typeof checked !== "boolean") {
+  if (!id || typeof completed !== "boolean") {
     return res.status(400).json({ message: "All fields are required" });
   }
 
   // Confirm task exists to update and update it
-  const task = await Item.findOne({ id }).exec();
+  const task = await Task.findOne({ id }).exec();
 
   if (!task) {
-    return res.status(400).json({ message: "Item not found" });
+    return res.status(400).json({ message: "Task not found" });
   }
 
-  task.checked = checked;
+  task.completed = completed;
 
   const updatedTask= await task.save();
 
-  res.json(`'${updatedTask.checked}' updated`);
+  res.json(`'${updatedTask.completed}' updated`);
 });
 
 // @desc Delete a task 
@@ -74,7 +74,7 @@ const deleteTask = asyncHandler(async (req, res) => {
   }
 
   // Confirm task exists to delete
-  const task = await Item.findOne({ id }).exec();
+  const task = await Task.findOne({ id }).exec();
 
   if (!task) {
     return res.status(400).json({ message: "Task not found" });
@@ -82,7 +82,7 @@ const deleteTask = asyncHandler(async (req, res) => {
 
   const result = await task.deleteOne();
 
-  const reply = `Item '${result.itemName}' with ID ${result.id} deleted`;
+  const reply = `Task '${result.taskDesc}' with ID ${result.id} deleted`;
 
   res.json(reply);
 });
