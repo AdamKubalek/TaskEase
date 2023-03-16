@@ -33,7 +33,6 @@ const login = async (req, res) => {
     {
       UserInfo: {
         username: foundUser.username,
-        roles: foundUser.roles,
       },
     },
     process.env.ACCESS_TOKEN_SECRET,

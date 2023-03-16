@@ -434,3 +434,7 @@
 20230315	14:51:24	86951fd9-2f57-4b84-85a9-868c1dd61219	POST	/users	http://localhost:3000
 20230315	14:51:36	3b28e5cc-f61a-49a9-a633-88e6cc9d6f20	OPTIONS	/users	http://localhost:3000
 20230315	14:51:36	6280ae9b-028e-46e1-a822-317f3bd4d2df	POST	/users	http://localhost:3000
+20230315	15:00:05	c69a89ae-1c4a-41cb-9eb2-dd17bc110769	GET	/tasks	http://localhost:3000
+20230315	15:00:05	81afae95-77a9-49e9-8c97-148dacde9e18	GET	/tasks	http://localhost:3000
+20230315	15:00:23	2a055b81-700e-4b24-83e2-c3a1503e9c2e	GET	/tasks	http://localhost:3000
+20230315	15:00:23	aa12518d-3c2c-459f-ba66-7864eed43d9b	GET	/tasks	http://localhost:3000
