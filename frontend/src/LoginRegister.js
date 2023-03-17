@@ -1,12 +1,12 @@
 import React from 'react'
-import Registration from './features/users/Registration'
+import Registration from './features/users/NewUserForm'
 import Login from './features/auth/Login'
 
 const SingUpIn = () => {
   return (
     <div className="container">
       <input type="checkbox" id="hidden-btn" />
-      <Registration />
+      <NewUserForm />
       <Login />
     </div>
   )

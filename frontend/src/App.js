@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "./Home";
-import SingUpIn from "./SingUpIn";
+import SingUpIn from "./LoginRegister";
 
 const App = () => {
   return (
