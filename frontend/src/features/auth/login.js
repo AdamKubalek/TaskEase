@@ -11,10 +11,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
 
-  // useEffect(() => {
-  //   emailRef.current.focus();
-  // }, []);
-
   useEffect(() => {
     setErrMsg("");
   }, [email, password]);
