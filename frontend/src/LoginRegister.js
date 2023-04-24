@@ -6,7 +6,7 @@ const SingUpIn = () => {
   return (
     <div className="container">
       <input type="checkbox" id="hidden-btn" />
-      <NewUserForm />
+      <Registration />
       <Login />
     </div>
   )
